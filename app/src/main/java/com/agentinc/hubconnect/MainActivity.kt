@@ -11,6 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.agentinc.hubconnect.ui.theme.HubconnectTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,11 +22,18 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HubconnectTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+
+                NavHost(
+                    navController = navController,
+                    startDestination = "home"
+                ) {
+                    composable("home") {
+                        HomeScreen()
+                    }
+                    composable("other"){
+                        OtherScreen()
+                    }
                 }
             }
         }
@@ -31,14 +41,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun HomeScreen() {
     Text("test")
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    HubconnectTheme {
-        Greeting("Android")
-    }
+fun OtherScreen() {
+    Text("test2")
 }
