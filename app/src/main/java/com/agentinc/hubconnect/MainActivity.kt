@@ -29,10 +29,10 @@ class MainActivity : ComponentActivity() {
                     startDestination = "home"
                 ) {
                     composable("home") {
-                        HomeScreen()
+                        HomeScreen(navController = navController)
                     }
                     composable("other"){
-                        OtherScreen()
+                        OtherScreen(navController = navController)
                     }
                 }
             }
@@ -41,11 +41,21 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HomeScreen() {
-    Text("test")
+fun HomeScreen(navController: NavHostController) {
+    Text("basil is the best")
+    Button(onClick = {
+        navController.navigate("other")
+    }) {
+        Text("Go Next Page")
+    }
 }
 
 @Composable
 fun OtherScreen() {
     Text("test2")
+    Button(onClick = {
+        navController.popBackStack("other")
+    }) {
+        Text("Go Back")
+    }
 }
